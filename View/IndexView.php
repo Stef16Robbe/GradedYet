@@ -12,7 +12,6 @@ class IndexView
 		$this->IndexModel = $indexModel;
 	}
 
-	//output to html
 	public function output(){
 		$page = "";
 		$page .= $this->Header();
@@ -22,11 +21,29 @@ class IndexView
 	}
 
 	private function Header() {
-		return "";
+		return "
+		<!DOCTYPE HTML>
+		<html>
+			<head> 
+				<title> GradedYet </title>
+				<link rel='stylesheet' type='text/css' href='./IndexStyle.css'>
+				<link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet'>
+			</head>
+		</html>
+		";
 	}
 
 	private function Body() {
-		return "";
+		return "
+		<body>
+			<div class='header'>
+				<div class='login'>
+					<p id='loginP' class='roboto'>I Am a Teacher</p>
+				</div>
+			</div>
+
+		</body>
+		";
 	}
 
 	private function Footer() {
