@@ -7,7 +7,12 @@
 }
 
 body {
-    height: 100vh;
+    height: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
 .roboto {
@@ -16,21 +21,46 @@ body {
 
 .header {
     width: 100%;
-    height: 5%;
+    height: 10%;
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
 }
 
-.login {
-    padding-top: 0.7%;
-    margin-left: 90%;
+.headerLogo {
+    max-width: 10%;
+    float: left;
 }
 
-#loginP {
+.logo {
+    height: 70px;
+    width: 70px;
+    margin-left: 20px;
+    margin-top: 10px;
+    border: 1px solid black;
+}
+
+.login {
+    margin-top: 32px;
+    width: auto;
+    margin-left: 88%;
+}
+
+#loginH2 {
     height: 0px;
 }
 
-#loginP:hover {
+#loginH2:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.chooseGroup {
+    margin-left: 10%;
+    margin-top: 5%;
+    max-width: 30%;
+    height: 0%;
+}
+
+#chooseGroupH1 {
+    font-size: 50px;
 }

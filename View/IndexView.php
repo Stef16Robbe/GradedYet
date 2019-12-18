@@ -37,9 +37,16 @@ class IndexView
 		return "
 		<body>
 			<div class='header'>
-				<div class='login'>
-					<p id='loginP' class='roboto'>I Am a Teacher</p>
+				<div class='headerLogo'>
+					<!--<img src='Images/Logo.png' class='logo'>-->
+					<div class='logo'></div>
 				</div>
+				<div class='login'>
+					<a href='Login.php'><h2 id='loginH2' class='roboto'>I Am a Teacher</h2></a>
+				</div>
+			</div>
+			<div class='chooseGroup'>
+				<h1 id='chooseGroupH1' class='roboto'>Choose your group</h1>
 			</div>
 
 		</body>
