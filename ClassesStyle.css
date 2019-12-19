@@ -55,62 +55,55 @@ a {
     text-decoration: underline;
 }
 
-/*CHOOSE GROUP HEADER*/
-.chooseGroup {
-    margin-left: 10%;
-    margin-top: 5%;
-    max-width: 30%;
-    height: 0%;
-}
-
-#chooseGroupH1 {
-    font-size: 50px;
-}
-
-/*CHOOSE CLASS GRID*/
-.classGrid {
-    height: 30%;
-    width: 55.5%;
+/*CLASSESGRID*/
+.classesCardsGrid {
     position: relative;
-    top: 150px;
-    left: 430px;
+    top: 200px;
+    left: 200px;
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-column-gap: 30px;
     grid-row-gap: 30px;
+    max-height: 46.5%;
+    max-width: 80%;
 }
 
 .classCard {
-    height: 150px;
-    width: 250px;
-    border: 1px solid black;
-    /*rgba(0, 0, 0, 0.1)*/
-    border-radius: 4px;
+    width: 300px;
+    height: 500px;
     box-sizing: border-box;
     transition: transform .2s;
 }
 
 .classCard:hover {
-    -ms-transform: scale(1.2); /* IE 9 */
-    -webkit-transform: scale(1.2); /* Safari 3-8 */
-    transform: scale(1.2); 
-  }
-
-.classTitleH1 {
-    font-family: sans-serif;
-    height: 0px;
-    margin-top: 10%;
-    margin-left: 10%;
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05);
 }
 
-.viewClassesLink {
-    margin-top: 25%;
-    margin-left: 10%;
+.topHalveClassCard {
+    height: 45%;
+}
+
+.bottomHalveClassCard {
+    height: 45%;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.classesTitleH1 {
+    font-family: sans-serif;
     height: 0px;
+    margin-left: 8%;
+    margin-top: 15%;
 }
 
 .classLinkP {   
     font-family: sans-serif;
     color: #07f;
     font-weight: bold;
+    margin-top: 30%;
+    margin-left: 8%;
+    height: 0px;
 }
