@@ -1,18 +1,21 @@
 <?php 
 require_once("Autoloader.php");
 
-class LoginView
+class RegisterView
 {
-	private $LoginController;
-	private $LoginModel;
+	private $RegisterController;
+	private $RegisterModel;
+	private $RegisterAccountErrorMessage;
 
-	public function __construct($LoginController, $LoginModel)
+	public function __construct($RegisterController, $RegisterModel)
 	{
-		$this->LoginController = $LoginController;
-		$this->LoginModel = $LoginModel;
+		$this->RegisterController = $RegisterController;
+		$this->RegisterModel = $RegisterModel;
+		$this->ErrorMessageLogin = "";
 	}
 
-	public function output(){
+	public function output() {
+    $this->RegisterAccountErrorMessage = $this->RegisterController->RegisterUser();
 		$page = "";
 		$page .= $this->Header();
 		$page .= $this->Body();
@@ -22,11 +25,11 @@ class LoginView
 
 	private function Header() {
 		return "
-		<!DOCTYPE HTML>
+        <!DOCTYPE HTML>
 		<html>
 			<head> 
 				<title> GradedYet </title>
-				<link rel='stylesheet' type='text/css' href='./CSS/LoginStyle.css'>
+				<link rel='stylesheet' type='text/css' href='./CSS/RegisterStyle.css'>
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto&display=swap'>
         <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'>
         <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
@@ -47,29 +50,27 @@ class LoginView
               <div class='container'>
                 <div class='row'>
                   <div class='col-md-9 col-lg-8 mx-auto'>
-                    <h3 class='login-heading mb-4'>Welcome back!</h3>
-                    <form>
+                    <h3 class='login-heading mb-4'>Register Teacher Account</h3>
+                    <form type='post' action=''>
                       <div class='form-label-group'>
-                        <input type='email' id='inputEmail' class='form-control' placeholder='Email address' required autofocus>
+                        <input type='email' id='inputEmail' class='form-control' placeholder='Email address' name='RegisterUserEmail' required autofocus>
                         <label for='inputEmail'>Email address</label>
                       </div>
-      
+
                       <div class='form-label-group'>
-                        <input type='password' id='inputPassword' class='form-control' placeholder='Password' required>
+                        <input type='password' id='inputPassword' class='form-control' placeholder='Password' name='RegisterUserPassword' required>
                         <label for='inputPassword'>Password</label>
                       </div>
-      
-                      <div class='custom-control custom-checkbox mb-3'>
-                        <input type='checkbox' class='custom-control-input' id='customCheck1'>
-                        <label class='custom-control-label' for='customCheck1'>Remember password</label>
+
+                      <div class='form-label-group'>
+                        <input type='password' id='inputConfirmPassword' class='form-control' placeholder='Confirm Password' required>
+                        <label for='inputConfirmPassword'>Confirm Password</label>
                       </div>
-                      <button class='btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2' type='submit'>Sign in</button>
-                      <div class='text-center'>
-                        <a class='medium' href='#'>Forgot password?</a>
-                      </div>
-                      <div class='text-center'>
-                        <a class='small' href='Register.php'>New Teacher?</a>
-                      </div>
+
+                      <!-- userfeedback box -->
+                      <p id='negativeFeedbackText'> ".$this->RegisterAccountErrorMessage."</p>
+
+                      <button class='btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2' type='submit' name='RegisterUserBtn'>Register Account</button>
                     </form>
                   </div>
                 </div>

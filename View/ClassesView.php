@@ -26,7 +26,7 @@ class ClassesView
 		<html>
 			<head> 
 				<title> GradedYet </title>
-				<link rel='stylesheet' type='text/css' href='./ClassesStyle.css'>
+				<link rel='stylesheet' type='text/css' href='./CSS/ClassesStyle.css'>
 				<link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet'>
 				<meta name='viewport' content='width=device-width, initial-scale=1'>
 			</head>
