@@ -7,7 +7,7 @@ class RegisterController
 	private $Config;
 
 	public function __construct($RegisterModel) {
-		$this->IndexModel = $RegisterModel;
+		$this->RegisterModel = $RegisterModel;
         $this->Config = Config::getInstance();
 	}
 	

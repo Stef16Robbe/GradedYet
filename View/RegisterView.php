@@ -14,8 +14,9 @@ class RegisterView
 		$this->ErrorMessageLogin = "";
 	}
 
-	public function output(){
-        $this->RegisterAccountErrorMessage = $this->RegisterController->RegisterUser();
+
+	public function output() {
+    $this->RegisterAccountErrorMessage = $this->RegisterController->RegisterUser();
 		$page = "";
 		$page .= $this->Header();
 		$page .= $this->Body();
@@ -30,10 +31,10 @@ class RegisterView
 			<head> 
 				<title> GradedYet </title>
 				<link rel='stylesheet' type='text/css' href='./CSS/RegisterStyle.css'>
-                <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto&display=swap'>
-                <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'>
-                <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-                <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto&display=swap'>
+        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'>
+        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+        <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
 			</head>
 		</html>
 		";

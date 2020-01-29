@@ -29,13 +29,14 @@ class DB_Helper
 	//Insert
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public function RegisterUser($email, $password) {
+	public function RegisterUser($email, $name, $password) {
 		// clean email and password
 		$cleanEmail = mysqli_real_escape_string($this->Conn, $email);
 		$cleanPassword = mysqli_real_escape_string($this->Conn, $password);
+		$cleanName = mysqli_real_escape_string($this->Conn, $name);
 
 		// does prepared query
-		$stmt = $this->Conn->prepare("");
+		$stmt = $this->Conn->prepare("INSERT INTO Teachers (Email, Name) VALUES(?, ?)");
 		$stmt->bind_param("ss", $cleanEmail, $cleanPassword);
 
 		// commit or rollback transaction
@@ -48,13 +49,30 @@ class DB_Helper
 		} 
 	}
 
+	private function RegisterUserPsw($cleanPassword) {
+		// does a prepared query
+		$stmt = $this->Conn->prepare("INSERT INTO passwords (TeacherId, Password) VALUES((SELECT Id FROM teachers ORDER BY Id DESC LIMIT 1), ?)");
+		$stmt->bind_param("s", $cleanPassword);
+		
+		//Commit or rollback transaction 
+		if ($stmt->execute()) {
+			$this->Conn->commit();
+		} else {
+			$this->Conn->rollback();
+			throw new Exception("Error: " . $sql . "<br>" . $this->Conn->error);
+		}
+	}
+
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Update
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Delete
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 }
 ?>
