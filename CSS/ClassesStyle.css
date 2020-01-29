@@ -1,0 +1,109 @@
+/* GLOBAL STUFF */
+* {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+/*HEADER*/
+.header {
+    width: 100%;
+    height: 10%;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.headerLogo {
+    max-width: 10%;
+    float: left;
+}
+
+.logo {
+    height: 70px;
+    width: 70px;
+    margin-left: 20px;
+    margin-top: 10px;
+    border: 1px solid black;
+}
+
+.login {
+    margin-top: 32px;
+    width: auto;
+    margin-left: 88%;
+}
+
+#loginH2 {
+    height: 0px;
+}
+
+#loginH2:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/*CLASSESGRID*/
+.classesCardsGrid {
+    position: relative;
+    top: 200px;
+    left: 200px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    max-height: 46.5%;
+    max-width: 80%;
+}
+
+.classCard {
+    width: 300px;
+    height: 500px;
+    box-sizing: border-box;
+    transition: transform .2s;
+}
+
+.classCard:hover {
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari 3-8 */
+    transform: scale(1.05);
+}
+
+.topHalveClassCard {
+    height: 45%;
+}
+
+.bottomHalveClassCard {
+    height: 45%;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.classesTitleH1 {
+    font-family: sans-serif;
+    height: 0px;
+    margin-left: 8%;
+    margin-top: 15%;
+}
+
+.classLinkP {   
+    font-family: sans-serif;
+    color: #07f;
+    font-weight: bold;
+    margin-top: 30%;
+    margin-left: 8%;
+    height: 0px;
+}

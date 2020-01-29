@@ -1,13 +1,13 @@
 <?php
 require_once( "Autoloader.php");
-class IndexController 
+class ClassesController 
 {
-	private $IndexModel;
+	private $ClassesModel;
 	private $Session;
 	private $Config;
 
-	public function __construct($indexModel) {
-		$this->IndexModel = $indexModel;
+	public function __construct($ClassesModel){
+		$this->ClassesModel = $ClassesModel;
 		$this->Config = Config::getInstance();
 	}
 	

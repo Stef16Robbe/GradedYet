@@ -26,10 +26,10 @@ class IndexView
 		<html>
 			<head> 
 				<title> GradedYet </title>
-				<link rel='stylesheet' type='text/css' href='./IndexStyle.css'>
+                <link rel='stylesheet' type='text/css' href='./CSS/IndexStyle.css'>
 				<link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet'>
+                <meta name='viewport' content='width=device-width, initial-scale=1'>
 			</head>
-		</html>
 		";
 	}
 
@@ -37,12 +37,68 @@ class IndexView
 		return "
 		<body>
 			<div class='header'>
+				<div class='headerLogo'>
+					<!-- <img src='Images/Logo.png' class='logo'> -->
+					<div class='logo'></div>
+				</div>
 				<div class='login'>
-					<p id='loginP' class='roboto'>I Am a Teacher</p>
+					<a href='Login.php'><h2 id='loginH2' class='roboto'>I Am a Teacher</h2></a>
 				</div>
 			</div>
-
-		</body>
+			<div class='chooseGroup'>
+				<h1 id='chooseGroupH1' class='roboto'>Choose your group</h1>
+			</div>
+			<div class='classGrid'>
+                <div class='classCard'>
+                    <h1 class='classTitleH1'>INF1SA</h1>
+                    <div class='viewClassesLink'>
+                        <a href='Classes.php'><p class='classLinkP'>View your classes ></p></a>
+                    </div>
+                </div>
+                <div class='classCard'>
+                    <h1 class='classTitleH1'>INF1SB</h1>
+                    <div class='viewClassesLink'>
+                        <a href='Classes.php'><p class='classLinkP'>View your classes ></p></a>
+                    </div>
+                </div>
+                <div class='classCard'>
+                    <h1 class='classTitleH1'>INF1C</h1>
+                    <div class='viewClassesLink'>
+                        <a href='Classes.php'><p class='classLinkP'>View your classes ></p></a>
+                    </div>
+                </div>
+                <div class='classCard'>
+                    <h1 class='classTitleH1'>INF1D</h1>
+                    <div class='viewClassesLink'>
+                        <a href='Classes.php'><p class='classLinkP'>View your classes ></p></a>
+                    </div>
+                </div>
+                <div class='classCard'>
+                    <h1 class='classTitleH1'>INF2SB</h1>
+                    <div class='viewClassesLink'>
+                        <a href='Classes.php'><p class='classLinkP'>View your classes ></p></a>
+                    </div>
+                </div>
+                <div class='classCard'>
+                    <h1 class='classTitleH1'>INF2SA</h1>
+                    <div class='viewClassesLink'>
+                        <a href='Classes.php'><p class='classLinkP'>View your classes ></p></a>
+                    </div>
+                </div>
+                <div class='classCard'>
+                    <h1 class='classTitleH1'>INF2SC</h1>
+                    <div class='viewClassesLink'>
+                        <a href='Classes.php'><p class='classLinkP'>View your classes ></p></a>
+                    </div>
+                </div>
+                <div class='classCard'>
+                    <h1 class='classTitleH1'>INF2D</h1>
+                    <div class='viewClassesLink'>
+                        <a href='Classes.php'><p class='classLinkP'>View your classes ></p></a>
+                </div>
+            </div>
+        </body
+    </html
 		";
 	}
 
