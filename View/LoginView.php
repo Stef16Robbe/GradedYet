@@ -26,11 +26,11 @@ class LoginView
 		<html>
 			<head> 
 				<title> GradedYet </title>
-				<link rel='stylesheet' type='text/css' href='./LoginStyle.css'>
-                <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto&display=swap'>
-                <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'>
-                <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-                <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+				<link rel='stylesheet' type='text/css' href='./CSS/LoginStyle.css'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto&display=swap'>
+        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'>
+        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+        <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
 			</head>
 		</html>
 		";
@@ -65,7 +65,11 @@ class LoginView
                       </div>
                       <button class='btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2' type='submit'>Sign in</button>
                       <div class='text-center'>
-                        <a class='small' href='#'>Forgot password?</a></div>
+                        <a class='medium' href='#'>Forgot password?</a>
+                      </div>
+                      <div class='text-center'>
+                        <a class='small' href='Register.php'>New Teacher?</a>
+                      </div>
                     </form>
                   </div>
                 </div>

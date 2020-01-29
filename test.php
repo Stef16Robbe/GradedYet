@@ -1,7 +1,7 @@
 <!DOCTYPE html >
 <html>
     <head>
-        <link rel='stylesheet' type='text/css' href='./test.css'>
+        <link rel='stylesheet' type='text/css' href='./CSS/test.css'>
         <link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet'>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
     </head>

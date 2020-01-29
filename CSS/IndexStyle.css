@@ -46,15 +46,6 @@ a {
     margin-left: 88%;
 }
 
-#loginH2 {
-    height: 0px;
-}
-
-#loginH2:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
 /*CHOOSE GROUP HEADER*/
 .chooseGroup {
     margin-left: 10%;

@@ -6,7 +6,7 @@ class IndexController
 	private $Session;
 	private $Config;
 
-	public function __construct($indexModel){
+	public function __construct($indexModel) {
 		$this->IndexModel = $indexModel;
 		$this->Config = Config::getInstance();
 	}

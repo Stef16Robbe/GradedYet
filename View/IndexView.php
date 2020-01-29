@@ -26,9 +26,7 @@ class IndexView
 		<html>
 			<head> 
 				<title> GradedYet </title>
-                <link rel='stylesheet' type='text/css' href='./IndexStyle.css'>
-                <link rel='stylesheet' type='text/css' href='./main.css'>
-                <link rel='stylesheet' type='text/css' href='./util.css'>
+                <link rel='stylesheet' type='text/css' href='./CSS/IndexStyle.css'>
 				<link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet'>
                 <meta name='viewport' content='width=device-width, initial-scale=1'>
 			</head>
@@ -40,7 +38,7 @@ class IndexView
 		<body>
 			<div class='header'>
 				<div class='headerLogo'>
-					<!--<img src='Images/Logo.png' class='logo'>-->
+					<!-- <img src='Images/Logo.png' class='logo'> -->
 					<div class='logo'></div>
 				</div>
 				<div class='login'>
