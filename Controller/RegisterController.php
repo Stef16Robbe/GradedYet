@@ -4,11 +4,13 @@ class RegisterController
 {
 	private $RegisterModel;
 	private $Session;
-	private $Config;
+    private $Config;
+    private $DB_Helper;
 
 	public function __construct($RegisterModel) {
 		$this->RegisterModel = $RegisterModel;
         $this->Config = Config::getInstance();
+        $this->DB_Helper = new DB_Helper();
 	}
 	
 	// get config
@@ -16,7 +18,7 @@ class RegisterController
 		return $this->Config;
     }
     
-    public function RegisterUser() {
+    public function RegisterTeacher() {
         try {
 			$this->Register();
 		} catch (Exception $e) {
@@ -25,10 +27,19 @@ class RegisterController
 		}
     }
 
+    public function GetExistingSchools() {
+        $existingSchools = $this->DB_Helper->GetSchools();
+        $schools = "";
+        foreach ($existingSchools as $existingSchool) {
+            $schools .= "<option value='".$existingSchool."'";
+        }
+        return $schools;
+    }
+
     private function Register() {
-        if (isset($_POST["RegisterUserBtn"])) {
-            $email = $_POST["RegisterUserEmail"];
-            $password = $_POST["RegisterUserPassword"];
+        if (isset($_POST["RegisterTeacherBtn"])) {
+            $email = $_POST["RegisterTeacherEmail"];
+            $password = $_POST["RegisterTeacherPassword"];
 
             if ($this->CheckEmail($email)) {
                 if ($this->CheckPassword($password)) {

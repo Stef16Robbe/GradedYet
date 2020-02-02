@@ -16,7 +16,7 @@ class RegisterView
 
 
 	public function output() {
-    $this->RegisterAccountErrorMessage = $this->RegisterController->RegisterUser();
+    $this->RegisterAccountErrorMessage = $this->RegisterController->RegisterTeacher();
 		$page = "";
 		$page .= $this->Header();
 		$page .= $this->Body();
@@ -53,25 +53,39 @@ class RegisterView
                   <div class='col-md-9 col-lg-8 mx-auto'>
                     <h3 class='login-heading mb-4'>Register Teacher Account</h3>
                     <form type='post' action=''>
+                      <div class='form-list'>
+                        <input list='schools' id='inputSchool' placeholder='Your School' name='RegisterTeacherSchool' required>
+                        <datalist id='schools'>
+                          ".$this->RegisterController->GetExistingSchools()."
+                        </datalist>
+                      </div>
+
+                      <br />
+
                       <div class='form-label-group'>
-                        <input type='email' id='inputEmail' class='form-control' placeholder='Email address' name='RegisterUserEmail' required autofocus>
+                        <input type='text' id='inputName' class='form-control' placeholder='First Name' name='RegisterTeacherName' required>
+                        <label for='inputName'>First Name</label>
+                      </div>
+
+                      <div class='form-label-group'>
+                        <input type='text' id='inputLastName' class='form-control' placeholder='Last Name' name='RegisterTeacherLastName' required>
+                        <label for='inputLastName'>Last Name</label>
+                      </div>
+
+                      <div class='form-label-group'>
+                        <input type='email' id='inputEmail' class='form-control' placeholder='Email address' name='RegisterTeacherEmail' required>
                         <label for='inputEmail'>Email address</label>
                       </div>
 
                       <div class='form-label-group'>
-                        <input type='password' id='inputPassword' class='form-control' placeholder='Password' name='RegisterUserPassword' required>
+                        <input type='password' id='inputPassword' class='form-control' placeholder='Password' name='RegisterTeacherPassword' required>
                         <label for='inputPassword'>Password</label>
-                      </div>
-
-                      <div class='form-label-group'>
-                        <input type='password' id='inputConfirmPassword' class='form-control' placeholder='Confirm Password' required>
-                        <label for='inputConfirmPassword'>Confirm Password</label>
                       </div>
 
                       <!-- userfeedback box -->
                       <p id='negativeFeedbackText'> ".$this->RegisterAccountErrorMessage."</p>
 
-                      <button class='btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2' type='submit' name='RegisterUserBtn'>Register Account</button>
+                      <button class='btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2' type='submit' name='RegisterTeacherBtn'>Register Account</button>
                     </form>
                   </div>
                 </div>
