@@ -3,7 +3,6 @@ require_once( "Autoloader.php");
 class RegisterController 
 {
 	private $RegisterModel;
-	private $Session;
     private $Config;
     private $DB_Helper;
 
@@ -31,46 +30,35 @@ class RegisterController
         $existingSchools = $this->DB_Helper->GetSchools();
         $schools = "";
         foreach ($existingSchools as $existingSchool) {
-            $schools .= "<option value='".$existingSchool."'";
+            $schools .= "<option class='schools' value='".$existingSchool."'";
         }
         return $schools;
     }
 
     private function Register() {
         if (isset($_POST["RegisterTeacherBtn"])) {
+            $school = $_POST["RegisterTeacherSchool"];
+            $name = $_POST["RegisterTeacherName"];
+            if (isset($_POST["RegisterTeacherPrefix"])) {
+                $prefix = $_POST["RegisterTeacherPrefix"];
+            } else {
+                $prefix = "";
+            }
+            $lastName = $_POST["RegisterTeacherLastName"];
             $email = $_POST["RegisterTeacherEmail"];
-            $password = $_POST["RegisterTeacherPassword"];
+            $password = hash('sha512', $_POST["RegisterTeacherPassword"]);
 
-            if ($this->CheckEmail($email)) {
-                if ($this->CheckPassword($password)) {
-                    $password = hash('sha512', $password);
-                    if ($this->DB_Helper->RegisterUser($email, $password)) {
-                        header("Location: TeacherPage.php");
+            if ($schoolId = $this->DB_Helper->CheckSchool($school)) {
+                if (!$this->DB_Helper->CheckEmail($email)) {
+                    if ($this->DB_Helper->RegisterTeacher($schoolId, $name, $prefix, $lastName, $email, $password)) {
+                        header("Location: Login.php");
                     } else {
-                        throw new Exception("Something went wrong. Your account has not been registered. Please try again.");
+                        throw new Exception("Something went wrong. Your account has not been registered. Please try again later.");
                     }
                 } else {
-                    throw new Exception("Invalid password.");
+                    throw new Exception("This Email has already been registered.");
                 }
-            } else {
-                throw new Exception("Invalid Email. Only Teachers can register a Teacher account.");
             }
-        }
-    }
-
-    private function CheckEmail($email) {
-        if (preg_match('/[a-zA-Z]@inholland.nl/', $email)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private function CheckPassword($password) {
-        if (preg_match('/^(?=[a-z])(?=[A-Z])[a-zA-Z]{8,}$/', $password)) {
-            return true;
-        } else {
-            return false;
         }
     }
 }
