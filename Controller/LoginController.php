@@ -17,7 +17,7 @@ class LoginController
 		$this->teacher = new Teacher();
 	}
 	
-	// get config
+	// get config 
 	public function GetConfig(){
 		return $this->Config;
 	}
