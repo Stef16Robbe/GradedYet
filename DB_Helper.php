@@ -140,6 +140,7 @@ class DB_Helper
 		// commit or rollback transaction 
 		if ($stmt->execute()) {
 			$this->Conn->commit();
+			return true;
 		} else {
 			$this->Conn->rollback();
 			return false;

@@ -39,7 +39,7 @@ class RegisterController
         if (isset($_POST["RegisterTeacherBtn"])) {
             $school = $_POST["RegisterTeacherSchool"];
             $name = $_POST["RegisterTeacherName"];
-            if (isset($_POST["RegisterTeacherPrefix"])) {
+            if (!empty($_POST["RegisterTeacherPrefix"])) {
                 $prefix = $_POST["RegisterTeacherPrefix"];
             } else {
                 $prefix = "";
@@ -58,6 +58,8 @@ class RegisterController
                 } else {
                     throw new Exception("This Email has already been registered.");
                 }
+            } else {
+                throw new Exception("Please select an already registered school.");
             }
         }
     }
