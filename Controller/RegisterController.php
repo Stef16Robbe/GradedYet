@@ -1,10 +1,11 @@
 <?php
-require_once( "Autoloader.php");
+require_once("Autoloader.php");
 class RegisterController 
 {
 	private $RegisterModel;
     private $Config;
     private $DB_Helper;
+    private $teacher;
 
 	public function __construct($RegisterModel) {
 		$this->RegisterModel = $RegisterModel;
@@ -37,23 +38,21 @@ class RegisterController
 
     private function Register() {
         if (isset($_POST["RegisterTeacherBtn"])) {
-            $school = $_POST["RegisterTeacherSchool"];
-            $name = $_POST["RegisterTeacherName"];
             if (!empty($_POST["RegisterTeacherPrefix"])) {
                 $prefix = $_POST["RegisterTeacherPrefix"];
             } else {
                 $prefix = "";
             }
-            $lastName = $_POST["RegisterTeacherLastName"];
-            $email = $_POST["RegisterTeacherEmail"];
+            $teacher = new Teacher(0, $_POST["RegisterTeacherName"], $prefix, $_POST["RegisterTeacherLastName"], 0, $_POST["RegisterTeacherEmail"]);
+            $school = $_POST["RegisterTeacherSchool"];
             $password = hash('sha512', $_POST["RegisterTeacherPassword"]);
 
-            if ($schoolId = $this->DB_Helper->CheckSchool($school)) {
-                if (!$this->DB_Helper->CheckEmail($email)) {
-                    if ($this->DB_Helper->RegisterTeacher($schoolId, $name, $prefix, $lastName, $email, $password)) {
+            if ($teacher->schoolId = $this->DB_Helper->CheckSchool($school)) {
+                if (!$this->DB_Helper->CheckEmail($teacher->email)) {
+                    if ($this->DB_Helper->RegisterTeacher($teacher, $password)) {
                         header("Location: Login.php");
                     } else {
-                        throw new Exception("Something went wrong. Your account has not been registered. Please try again later.");
+                        throw new Exception("Something went wrong. Your account has not been registered. Please try again.");
                     }
                 } else {
                     throw new Exception("This Email has already been registered.");

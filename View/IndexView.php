@@ -98,7 +98,7 @@ class IndexView
                 </div>
             </div>
         </body
-    </html
+    </html>
 		";
 	}
 

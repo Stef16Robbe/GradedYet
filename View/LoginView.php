@@ -14,7 +14,7 @@ class LoginView
 	}
 
 	public function output() {
-    $this->RegisterAccountErrorMessage = $this->LoginController->LoginTeacher();
+    $this->LoginAccountErrorMessage = $this->LoginController->LoginTeacher();
 		$page = "";
 		$page .= $this->Header();
 		$page .= $this->Body();
@@ -34,7 +34,6 @@ class LoginView
         <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
         <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
 			</head>
-		</html>
 		";
 	}
 
@@ -82,7 +81,8 @@ class LoginView
           </div>
         </div>
       </div>
-		</body>
+    </body>
+		</html>
 		";
 	}
 

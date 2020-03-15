@@ -77,28 +77,39 @@ class DB_Helper
 		}
 	}
 
-	public function CheckTeacherCredentials($teacher) {
+	public function CheckTeacherCredentials($email, $password) {
 		// clean user input
-		$teacher->email = $this->CleanValue($teacher->email);
-		$teacher->password = $this->CleanValue($teacher->password);
+		$cleanEmail = $this->CleanValue($email);
 
 		// does a prepared query
-		$stmt = $this->Conn->prepare("SELECT Id, Name, Prefix, LastName, SchoolId FROM `teacher` WHERE `Email` LIKE ? AND `Password` LIKE ?");
-		$stmt->bind_param("ss", $teacher->password, $teacher->password);
+		$stmt = $this->Conn->prepare("SELECT Id, Name, Prefix, LastName, SchoolId FROM `teacher` WHERE `Email` LIKE ?");
+		$stmt->bind_param("s", $cleanEmail);
 		$stmt->execute();
 		$stmt->store_result();
+		if ($this->CheckTeacherPsw($password)) {
+			if ($stmt->num_rows == 0) {
+				return false;
+			} else {
+				$stmt->bind_result($Id, $Name, $Prefix, $LastName, $SchoolId);
+				while ($stmt->fetch()) {
+					$teacher = new Teacher($Id, $Name, $Prefix, $LastName, $SchoolId, $password);
+				}
+				return $teacher;
+			}
+		}
+	}
+
+	private function CheckTeacherPsw($password) {
+		// does prepared query
+		$stmt = $this->Conn->prepare("SELECT Id FROM teacherlogin WHERE `Password` LIKE ?");
+		$stmt->bind_param("s", $password);
+		$stmt->execute();
+		$stmt->store_result();
+		
 		if ($stmt->num_rows == 0) {
 			return false;
 		} else {
-			$stmt->bind_result($Id, $Name, $Prefix, $LastName, $SchoolId);
-			while ($stmt->fetch()) {
-				$teacher->id = $Id;
-				$teacher->name = $Name;
-				$teacher->prefix = $Prefix;
-				$teacher->lastName = $LastName;
-				$teacher->schoolId = $SchoolId;	
-			}
-			return $teacher;
+			return true;
 		}
 	}
 
@@ -106,16 +117,16 @@ class DB_Helper
 	//Insert
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public function RegisterTeacher($schoolId, $name, $prefix, $lastName, $email, $password) {
+	public function RegisterTeacher($teacher, $password) {
 		// clean user input
-		$cleanName = $this->CleanValue($name);
-		$cleanPrefix = $this->CleanValue($prefix);
-		$cleanLastName = $this->CleanValue($lastName);
-		$cleanEmail = $this->CleanValue($email);
+		$cleanName = $this->CleanValue($teacher->name);
+		$cleanPrefix = $this->CleanValue($teacher->prefix);
+		$cleanLastName = $this->CleanValue($teacher->lastName);
+		$cleanEmail = $this->CleanValue($teacher->email);
 
 		// does prepared query
 		$stmt = $this->Conn->prepare("INSERT INTO teacher (Name, Prefix, LastName, SchoolId, Email) VALUES(?, ?, ?, ?, ?)");
-		$stmt->bind_param("sssis", $cleanName, $cleanPrefix, $cleanLastName, $schoolId, $cleanEmail);
+		$stmt->bind_param("sssis", $cleanName, $cleanPrefix, $cleanLastName, $teacher->schoolId, $cleanEmail);
 
 		// commit or rollback transaction
 		if ($this->SetTeacherPsw($password)) {
@@ -130,12 +141,9 @@ class DB_Helper
 	}
 
 	private function SetTeacherPsw($password) {
-		// clean user input
-		$cleanPassword = $this->CleanValue($password);
-
 		// does a prepared query
 		$stmt = $this->Conn->prepare("INSERT INTO teacherlogin (Password) VALUES(?)");
-		$stmt->bind_param("s", $cleanPassword);
+		$stmt->bind_param("s", $password);
 		
 		// commit or rollback transaction 
 		if ($stmt->execute()) {

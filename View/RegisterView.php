@@ -36,7 +36,6 @@ class RegisterView
         <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
         <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>-->
 			</head>
-		</html>
 		";
 	}
 
@@ -101,7 +100,8 @@ class RegisterView
           </div>
         </div>
       </div>
-		</body>
+    </body>
+    </html>
 		";
 	}
 

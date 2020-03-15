@@ -7,14 +7,12 @@ class LoginController
 	private $Config;
 	private $DB_Helper;
 	private $encryptionHelper;
-	private $teacher;
 
 	public function __construct($LoginModel){
 		$this->IndexModel = $LoginModel;
 		$this->Config = Config::getInstance();
 		$this->DB_Helper = new DB_Helper();
 		$this->encryptionHelper = new EncryptionHelper();
-		$this->teacher = new Teacher();
 	}
 	
 	// get config 
@@ -41,11 +39,11 @@ class LoginController
 	
 	private function Login() {
 		if (isset($_POST["loginBtn"])) {
-			$this->teacher->email = $_POST["email"];
-			$this->teacher->password = hash('sha512', $_POST["password"]);
-			if ($this->teacher = $this->DB_Helper->CheckTeacherCredentials($teacher)) {
-				$this->SetSession();
-				$this->SetCookie();
+			$email = $_POST["email"];
+			$password = hash('sha512', $_POST["password"]);
+			if ($teacher = $this->DB_Helper->CheckTeacherCredentials($email, $password)) {
+				$this->SetSession($teacher);
+				$this->SetCookie($teacher);
 				header("Location: TeacherPage.php");
 			} else {
 				throw new Exception("Invalid credentials.");
