@@ -29,6 +29,24 @@
   border-radius: 2rem;
 }
 
+.form-list {
+  position: relative;
+}
+
+#inputSchool {
+  width: 580px;
+  height: 50px;
+  border-radius: 2rem;
+  border-style: 1px solid #777777;
+}
+
+.form-list>input,
+.form-list>label {
+  padding: var(--input-padding-y) var(--input-padding-x);
+  height: auto;
+  border-radius: 2rem;
+}
+
 .form-label-group {
   position: relative;
   margin-bottom: 1rem;
