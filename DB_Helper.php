@@ -82,7 +82,7 @@ class DB_Helper
 		$cleanEmail = $this->CleanValue($email);
 
 		// does a prepared query
-		$stmt = $this->Conn->prepare("SELECT Id, Name, Prefix, LastName, SchoolId FROM `teacher` WHERE `Email` LIKE ?");
+		$stmt = $this->Conn->prepare("SELECT Id, `Name`, Prefix, LastName, SchoolId FROM `teacher` WHERE `Email` LIKE ?");
 		$stmt->bind_param("s", $cleanEmail);
 		$stmt->execute();
 		$stmt->store_result();
@@ -92,7 +92,7 @@ class DB_Helper
 			} else {
 				$stmt->bind_result($Id, $Name, $Prefix, $LastName, $SchoolId);
 				while ($stmt->fetch()) {
-					$teacher = new Teacher($Id, $Name, $Prefix, $LastName, $SchoolId, $password);
+					$teacher = new Teacher($Id, $Name, $Prefix, $LastName, $SchoolId, $cleanEmail);
 				}
 				return $teacher;
 			}
@@ -110,6 +110,28 @@ class DB_Helper
 			return false;
 		} else {
 			return true;
+		}
+	}
+
+	public function GetGroups($teacherId) {
+		// clean user input
+		$cleanId = $this->CleanValue($teacherId);
+
+		// does a prepared query
+		$stmt = $this->Conn->prepare("SELECT `Group`, Id FROM class WHERE TeacherId LIKE ?");
+		$stmt->bind_param("i", $cleanId);
+		$stmt->execute();
+		$stmt->store_result();
+		if ($stmt->num_rows == 0) {
+			return false;
+		} else {
+			$stmt->bind_result($Group, $Id);
+			$groups = array();
+			while ($stmt->fetch()) {
+				$group = array("Name"=>$Group, "Id"=>$Id);
+				$groups[] = $group;
+			}
+			return $groups;
 		}
 	}
 

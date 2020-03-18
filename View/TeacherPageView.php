@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start();
 require_once("Autoloader.php");
 
 class TeacherPageView
@@ -6,13 +7,12 @@ class TeacherPageView
 	private $TeacherPageController;
 	private $TeacherPageModel;
 
-	public function __construct($TeacherPageController, $TeacherPageModel)
-	{
+	public function __construct($TeacherPageController, $TeacherPageModel) {
 		$this->TeacherPageController = $TeacherPageController;
 		$this->TeacherPageModel = $TeacherPageModel;
 	}
 
-	public function output(){
+	public function output() {
 		$page = "";
 		$page .= $this->Header();
 		$page .= $this->Body();
@@ -34,8 +34,12 @@ class TeacherPageView
 	}
 
 	private function Body() {
-        return "
-        
+		return "
+			<body>
+				<div class='classGrid'>
+					".$this->TeacherPageController->GetGroups()."
+				</div>
+			</body>
         </html>
 		";
 	}
