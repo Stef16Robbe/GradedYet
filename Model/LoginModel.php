@@ -1,7 +1,7 @@
 <?php
 require_once("Autoloader.php");
-class LoginModel
+class LoginModel 
 {
-	function __construct() {	}
+    function __construct() { }
 }
 ?>

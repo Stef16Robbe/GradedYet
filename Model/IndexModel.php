@@ -1,7 +1,7 @@
 <?php
 require_once("Autoloader.php");
-class IndexModel
+class IndexModel 
 {
-	function __construct() { }
+    function __construct() { }
 }
 ?>

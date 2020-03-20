@@ -1,7 +1,7 @@
 <?php
 require_once("Autoloader.php");
-class RegisterModel
+class RegisterModel 
 {
-	function __construct() {	}
+    function __construct() { }
 }
 ?>
