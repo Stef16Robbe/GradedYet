@@ -55,55 +55,102 @@ a {
     text-decoration: underline;
 }
 
-/*CLASSESGRID*/
-.classesCardsGrid {
+.classesGrid {
+    height: 30%;
+    width: 55.5%;
     position: relative;
-    top: 200px;
-    left: 200px;
+    top: 100px;
+    left: 100px;
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-column-gap: 30px;
     grid-row-gap: 30px;
-    max-height: 46.5%;
-    max-width: 80%;
 }
 
 .classCard {
-    width: 300px;
-    height: 500px;
+    height: 200px;
+    width: 350px;
+    border: 1px solid black;
+    border-radius: 4px;
     box-sizing: border-box;
     transition: transform .2s;
 }
 
-.classCard:hover {
-    -ms-transform: scale(1.05); /* IE 9 */
-    -webkit-transform: scale(1.05); /* Safari 3-8 */
-    transform: scale(1.05);
-}
-
-.topHalveClassCard {
-    height: 45%;
-}
-
-.bottomHalveClassCard {
-    height: 45%;
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-}
-
-.classesTitleH1 {
+.classTitleH2 {
     font-family: sans-serif;
+    font-size: 13px;
     height: 0px;
-    margin-left: 8%;
-    margin-top: 15%;
+    margin-top: 5%;
+    margin-left: 5%;
 }
 
-.classLinkP {   
+.delIcon {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    position: relative;
+    left: 85%;
+    top: -9px;
+}
+
+.schoolName {
+    height: 0px;
+}
+
+.classSpecifications {
     font-family: sans-serif;
-    color: #07f;
+    font-size: 16px;
+    position: relative;
+    left: 5%;
+    top: 2%;
+    height: 40px;
+}
+
+.plusBtn {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #e6e6e6;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #bfbfbf;
     font-weight: bold;
-    margin-top: 30%;
-    margin-left: 8%;
-    height: 0px;
+    font-size: 14pt;
+    color: #00cc00;
+    cursor: pointer;
+    margin-left: 130px;
+    position: relative;
+    top: -45px;
+}
+
+.minusBtn {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #e6e6e6;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #bfbfbf;
+    font-weight: bold;
+    font-size: 14pt;
+    color: #ff0000;
+    cursor: pointer;
+    position: relative;
+    top: -45px;
+}
+
+.examinedAmount {
+    margin-top: -39px;
+    margin-left: 80px;
+}
+
+.totalAmount {
+    margin-top: -40px;
+    margin-left: 98px;
+}
+
+.saveExaminedAmount {
+    width: 50px;
+    margin-left: 55px;
+    cursor: pointer;
 }

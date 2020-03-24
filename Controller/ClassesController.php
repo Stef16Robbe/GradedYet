@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once( "Autoloader.php");
 class ClassesController 
 {
@@ -11,7 +12,7 @@ class ClassesController
 		$this->ClassesModel = $ClassesModel;
 		$this->Config = Config::getInstance();
 		$this->DB_Helper = new DB_Helper();
-		$this->GetClasses($_GET['groupName']);
+		$this->GetClasses();
 	}
 	
 	// get config
@@ -19,29 +20,32 @@ class ClassesController
 		return $this->Config;
 	}
 
-	private function GetClasses($groupName) {
+	public function GetClasses() {
+		$groupName = $_GET['groupName'];
 		$allClasses = "";
 		if ($groupName != null && !empty($groupName)) {
 			if ($classes = $this->DB_Helper->GetClasses($groupName, $_SESSION["teacherId"])) {
 				foreach ($classes as $class) {
 					// html element for class edit / add / subtraction
+					$schoolName = "Hogeschool InHolland";
 					$allClasses .= "
-					<div class='editClass'>
-						<div class='classGName'>
-							".$class->name." - ".$groupName."
+					<div class='classCard'>
+						<div class='classTitleH2'>
+							<h2>".$class->name."-".$class->group."</h2>
 						</div>
-						<div class='delLogo'>
-							image
+						<img src='./Images/trash_recyclebin_empty_closed.png' class='delIcon'>
+						<div class='classSpecifications'>
+							<p class='schoolName'><b>School:</b> ".$schoolName."</p>
 						</div>
-						<div class='schoolName'>
-							school name
+						<div class='classSpecifications progress'>
+							<p><b>Progress:</b></p>
+							<p class='examinedAmount' id='examinedAmount".$class->id."'>".$class->examinedAmount."</p>
+							<p class='totalAmount'>/".$class->amount."</p>
+							<button class='plusBtn' type='button' onclick='finishedAmountPlus(".$class->id.", ".$class->amount.")'>+</button>
+							<button class='minusBtn' type='button' onclick='finishedAmountMinus(".$class->id.")'>-</button>
+							<button class='saveExaminedAmount' type='button' onclick='saveFinishedAmount(".$class->id.", ".$class->amount.")'>Save</button>
 						</div>
-						<div class='progress'>
-							progress: PROGRDONE / PROGRTOT
-							image
-							image
-						</div>
-					</div
+            		</div>
 					";
 				}
 			} else {

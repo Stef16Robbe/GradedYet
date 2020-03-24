@@ -150,7 +150,7 @@ class DB_Helper
 			$stmt->bind_result($Id, $Name, $TestAmount, $ExaminedAmount, $TeacherId);
 			$classes = array();
 			while ($stmt->fetch()) {
-				$class = array(new ClassesModel($Id, $TeacherId, $Name, $cleanGroupName, $TestAmount, $ExaminedAmount));
+				$class = new ClassesModel($Id, $TeacherId, $Name, $cleanGroupName, $TestAmount, $ExaminedAmount);
 				$classes[] = $class;
 			}
 			return $classes;
@@ -203,6 +203,21 @@ class DB_Helper
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Update
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public function UpdateExaminedAmount($id, $examinedAmount) {
+		$cleanId = $this->CleanValue($id);
+		$cleanExaminedAmount = $this->CleanValue($examinedAmount);
+
+		$stmt = $this->Conn->prepare("UPDATE class SET ExaminedAmount = ? WHERE Id = ?");
+		$stmt->bind_param("ii", $cleanId, $cleanExaminedAmount);
+		if ($stmt->execute()) {
+			$this->Conn->commit();
+			return true;
+		} else {
+			$this->Conn->rollback();
+			return false;
+		}
+	}
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
