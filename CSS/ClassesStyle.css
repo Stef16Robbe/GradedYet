@@ -106,51 +106,24 @@ a {
     height: 40px;
 }
 
-.plusBtn {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background-color: #e6e6e6;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #bfbfbf;
-    font-weight: bold;
-    font-size: 14pt;
-    color: #00cc00;
-    cursor: pointer;
-    margin-left: 130px;
+.examinedAmountTxt {
     position: relative;
-    top: -45px;
-}
-
-.minusBtn {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background-color: #e6e6e6;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #bfbfbf;
-    font-weight: bold;
-    font-size: 14pt;
-    color: #ff0000;
-    cursor: pointer;
-    position: relative;
-    top: -45px;
-}
-
-.examinedAmount {
-    margin-top: -39px;
-    margin-left: 80px;
+    left: 80px;
+    top: -40px;
+    width: 25px;
+    height: 15px;
 }
 
 .totalAmount {
-    margin-top: -40px;
-    margin-left: 98px;
+    position: relative;
+    top: -58px;
+    left: 110px;
 }
 
 .saveExaminedAmount {
     width: 50px;
-    margin-left: 55px;
+    position: relative;
+    left: 255px;
+    top: -50px;
     cursor: pointer;
 }

@@ -209,7 +209,7 @@ class DB_Helper
 		$cleanExaminedAmount = $this->CleanValue($examinedAmount);
 
 		$stmt = $this->Conn->prepare("UPDATE class SET ExaminedAmount = ? WHERE Id = ?");
-		$stmt->bind_param("ii", $cleanId, $cleanExaminedAmount);
+		$stmt->bind_param("ii", $cleanExaminedAmount, $cleanId);
 		if ($stmt->execute()) {
 			$this->Conn->commit();
 			return true;

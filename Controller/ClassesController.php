@@ -39,11 +39,14 @@ class ClassesController
 						</div>
 						<div class='classSpecifications progress'>
 							<p><b>Progress:</b></p>
-							<p class='examinedAmount' id='examinedAmount".$class->id."'>".$class->examinedAmount."</p>
-							<p class='totalAmount'>/".$class->amount."</p>
-							<button class='plusBtn' type='button' onclick='finishedAmountPlus(".$class->id.", ".$class->amount.")'>+</button>
-							<button class='minusBtn' type='button' onclick='finishedAmountMinus(".$class->id.")'>-</button>
-							<button class='saveExaminedAmount' type='button' onclick='saveFinishedAmount(".$class->id.", ".$class->amount.")'>Save</button>
+							<form method='post' action='UpdateExaminedAmount.php' class='editExaminedAmount'>
+								<input type='text' name='examinedAmount' value=".$class->examinedAmount." class='examinedAmountTxt'>
+								<input type='hidden' name='totalAmount' value=".$class->amount." style='display:none'>
+								<input type='hidden' name='id' value=".$class->id." style='display:none'>
+								<input type='hidden' name='groupName' value=".$groupName." style='display:none'>
+								<p class='totalAmount'>/".$class->amount."</p>
+								<input type='submit' name='saveExaminedAmount' class='saveExaminedAmount' value='Save'>
+							</form>
 						</div>
             		</div>
 					";
