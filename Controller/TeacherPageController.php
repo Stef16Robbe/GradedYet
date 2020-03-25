@@ -20,17 +20,18 @@ class TeacherPageController
 
 	public function GetGroups() {
 		$allGroups = "";
+		$allGroups .= "PLUS ICON";
 		$teacherId = $_SESSION["teacherId"];
-		$groups = $this->DB_Helper->GetGroups($teacherId);
-
-		foreach($groups as $group) {
-			$allGroups .= 		
-			"<div class='classCard'>
-				<h1 class='classTitleH1'>".$group["Name"]."</h1>
-				<div class='viewClassesLink'>
-					<a href='Classes.php?groupName=".$group["Name"]."'><p class='classLinkP'>View your classes ></p></a>
-				</div>
-			</div>";
+		if ($groups = $this->DB_Helper->GetGroups($teacherId)) {
+			foreach($groups as $group) {
+				$allGroups .= 		
+				"<div class='classCard'>
+					<h1 class='classTitleH1'>".$group["Name"]."</h1>
+					<div class='viewClassesLink'>
+						<a href='Classes.php?groupName=".$group["Name"]."'><p class='classLinkP'>View your classes ></p></a>
+					</div>
+				</div>";
+			}
 		}
 		return $allGroups;
 	}

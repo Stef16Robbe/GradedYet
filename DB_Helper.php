@@ -224,6 +224,20 @@ class DB_Helper
 	//Delete
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public function DeleteClass($id) {
+		$cleanId = $this->CleanValue($id);
+		
+		$stmt = $this->Conn->prepare("DELETE FROM class WHERE Id = ?");
+		$stmt->bind_param("i", $cleanId);
+		if ($stmt->execute()) {
+			$this->Conn->commit();
+			return true;
+		} else {
+			$this->Conn->rollback();
+			return false;
+		}
+	}
+
 
 }
 ?>
