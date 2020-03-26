@@ -167,13 +167,14 @@ class DB_Helper
 		$cleanPrefix = $this->CleanValue($teacher->prefix);
 		$cleanLastName = $this->CleanValue($teacher->lastName);
 		$cleanEmail = $this->CleanValue($teacher->email);
+		$cleanPassword = $this->CleanValue($password);
 
 		// does prepared query
 		$stmt = $this->Conn->prepare("INSERT INTO teacher (Name, Prefix, LastName, SchoolId, Email) VALUES(?, ?, ?, ?, ?)");
 		$stmt->bind_param("sssis", $cleanName, $cleanPrefix, $cleanLastName, $teacher->schoolId, $cleanEmail);
 
 		// commit or rollback transaction
-		if ($this->SetTeacherPsw($password)) {
+		if ($this->SetTeacherPsw($cleanPassword)) {
 			if ($stmt->execute()) {
 				$this->Conn->commit();
 				return true;
@@ -188,6 +189,27 @@ class DB_Helper
 		// does a prepared query
 		$stmt = $this->Conn->prepare("INSERT INTO teacherlogin (Password) VALUES(?)");
 		$stmt->bind_param("s", $password);
+		
+		// commit or rollback transaction 
+		if ($stmt->execute()) {
+			$this->Conn->commit();
+			return true;
+		} else {
+			$this->Conn->rollback();
+			return false;
+		}
+	}
+
+	public function AddNewClass($groupName, $className, $totalTests, $teacherId) {
+		// clean user input
+		$cleanClassName = $this->CleanValue($className);
+		$cleanTestAmount = $this->CleanValue($totalTests);
+		$cleanGroupName = $this->CleanValue($groupName);
+		$cleanExaminedAmount = 0;
+
+		// does a prepared query
+		$stmt = $this->Conn->prepare("INSERT INTO class (Name, TestAmount, ExaminedAmount, `Group`, TeacherId) VALUES(?, ?, ?, ?, ?)");
+		$stmt->bind_param("siisi", $cleanClassName, $cleanTestAmount, $cleanExaminedAmount, $cleanGroupName, $teacherId);
 		
 		// commit or rollback transaction 
 		if ($stmt->execute()) {

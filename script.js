@@ -13,3 +13,8 @@ function deleteClass(id) {
         }
     });
 }
+
+function showAddClass() {
+    document.getElementById("addClassIcon").style.display="none";
+    document.getElementById("addClass").style.display="block";
+}

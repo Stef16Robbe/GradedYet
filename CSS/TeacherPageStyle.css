@@ -72,20 +72,20 @@ a {
 }
 
 .classCard {
-    height: 150px;
-    width: 250px;
+    height: 256px;
+    width: 256px;
     border: 1px solid black;
     /*rgba(0, 0, 0, 0.1)*/
     border-radius: 4px;
     box-sizing: border-box;
-    transition: transform .2s;
+    /*transition: transform .2s;*/
 }
 
-.classCard:hover {
-    -ms-transform: scale(1.2); /* IE 9 */
-    -webkit-transform: scale(1.2); /* Safari 3-8 */
+/* .classCard:hover {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
     transform: scale(1.2); 
-  }
+} */
 
 .classTitleH1 {
     font-family: sans-serif;
@@ -104,4 +104,62 @@ a {
     font-family: sans-serif;
     color: #07f;
     font-weight: bold;
+}
+
+#addClassIcon {
+    cursor: pointer;
+}
+
+#addClass {
+    display: none;
+}
+
+#groupNameP {
+    position: relative;
+    top: 40px;
+    left: 20px;    
+}
+
+#groupNameTxt {
+    position: relative;
+    left: 130px;
+    top: -223px;
+    height: 20px;
+    width: 100px;
+}
+
+#classNameP {
+    position: relative;
+    top: -210px;
+    left: 20px;    
+}
+
+#classNameTxt {
+    position: relative;
+    left: 130px;
+    top: -470px;
+    height: 20px;
+    width: 100px;
+}
+
+#totalTestsP {
+    position: relative;
+    top: -460px;
+    left: 20px;  
+}
+
+#totalTestsTxt {
+    position: relative;
+    left: 130px;
+    top: -726px;
+    height: 20px;
+    width: 100px;
+}
+
+#submitNewClass {
+    position: relative;
+    top: -650px;
+    left: 60px;
+    height: 30px;
+    width: 80px;
 }

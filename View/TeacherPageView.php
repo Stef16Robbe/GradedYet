@@ -29,6 +29,8 @@ class TeacherPageView
                 <link rel='stylesheet' type='text/css' href='./CSS/TeacherPageStyle.css'>
 				<link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet'>
                 <meta name='viewport' content='width=device-width, initial-scale=1'>
+				<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css'>
+				<script src='script.js'></script>
 			</head>
 		";
 	}

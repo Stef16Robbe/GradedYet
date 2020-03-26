@@ -19,9 +19,19 @@ class TeacherPageController
 	}
 
 	public function GetGroups() {
-		$allGroups = "";
-		$allGroups .= "PLUS ICON";
 		$teacherId = $_SESSION["teacherId"];
+		$allGroups = "";
+		$allGroups .= "<div class='classCard' id='addClassIcon' onclick='showAddClass()'> <img src='./Images/plus-2-icon-256.png'> </div>";
+		$allGroups .= 
+		"<div class='classCard' id='addClass'>
+			<form action='AddClass.php' method='post'>
+				<h1 class='classTitleH1'>New Class:</h1>
+				<p id='groupNameP'>Group name: </p> <input type='text' id='groupNameTxt' name='groupName'>
+				<p id='classNameP'>Class name: </p> <input type='text' id='classNameTxt' name='className'>
+				<p id='totalTestsP'>Amount of tests: </p> <input type='number' id='totalTestsTxt' name='totalTests'>
+				<input type='submit' id='submitNewClass' name='submitNewClass' value='Create'>
+			</form>
+		</div>";
 		if ($groups = $this->DB_Helper->GetGroups($teacherId)) {
 			foreach($groups as $group) {
 				$allGroups .= 		
