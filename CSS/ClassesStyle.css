@@ -29,6 +29,10 @@ a {
 
 .headerLogo {
     max-width: 10%;
+    position: relative;
+    left: 30px;
+    top: 20px;
+    cursor: pointer;
     float: left;
 }
 
@@ -126,4 +130,8 @@ a {
     left: 255px;
     top: -50px;
     cursor: pointer;
+}
+
+.progressBar {
+    width: 80%;
 }

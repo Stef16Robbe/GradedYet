@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("Autoloader.php");
 class TeacherPageController 
 {
@@ -7,10 +8,14 @@ class TeacherPageController
 	private $Config;
 	private $DB_Helper;
 
-	public function __construct($TeacherPageModel){
+	public function __construct($TeacherPageModel) {
 		$this->TeacherPageModel = $TeacherPageModel;
 		$this->Config = Config::getInstance();		
-		$this->DB_Helper = new DB_Helper();
+		$this->DB_Helper = new DB_Helper();		
+
+		if (!isset($_SESSION["teacherId"])) {
+			header("Location: Login.php");
+		}
 	}
 	
 	// get config

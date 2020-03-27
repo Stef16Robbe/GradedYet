@@ -135,7 +135,29 @@ class DB_Helper
 		}
 	}
 
-	public function GetClasses($groupName, $teacherId) {
+	public function GetTeacherClasses($groupName, $teacherId) {
+		// clean user input
+		$cleanGroupName = $this->CleanValue($groupName);
+
+		// does a prepared query
+		$stmt = $this->Conn->prepare("SELECT Id, `Name`, TestAmount, ExaminedAmount, TeacherId FROM class WHERE `Group` LIKE ? AND TeacherId LIKE ?");
+		$stmt->bind_param("si", $cleanGroupName, $teacherId);
+		$stmt->execute();
+		$stmt->store_result();
+		if ($stmt->num_rows == 0) {
+			return false;
+		} else {
+			$stmt->bind_result($Id, $Name, $TestAmount, $ExaminedAmount, $TeacherId);
+			$classes = array();
+			while ($stmt->fetch()) {
+				$class = new ClassesModel($Id, $TeacherId, $Name, $cleanGroupName, $TestAmount, $ExaminedAmount);
+				$classes[] = $class;
+			}
+			return $classes;
+		}
+	}
+
+	public function GetClasses($groupName) {
 		// clean user input
 		$cleanGroupName = $this->CleanValue($groupName);
 
@@ -154,6 +176,24 @@ class DB_Helper
 				$classes[] = $class;
 			}
 			return $classes;
+		}
+	}
+
+	public function GetAllGroups() {
+		// does a prepared query
+		$stmt = $this->Conn->prepare("SELECT Id, `Group` FROM class");
+		$stmt->execute();
+		$stmt->store_result();
+		if ($stmt->num_rows == 0) {
+			return false;
+		} else {
+			$stmt->bind_result($Id, $Group);
+			$groups = array();
+			while ($stmt->fetch()) {
+				$group = array("Name"=>$Group, "Id"=>$Id);
+				$groups[] = $group;
+			}
+			return $groups;
 		}
 	}
 

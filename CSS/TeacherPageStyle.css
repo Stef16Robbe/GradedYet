@@ -11,7 +11,12 @@ body {
 }
 
 a {
-    color: inherit;
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
     text-decoration: none;
 }
 
@@ -28,6 +33,10 @@ a {
 }
 
 .headerLogo {
+    position: relative;
+    left: 30px;
+    top: 20px;
+    cursor: pointer;
     max-width: 10%;
     float: left;
 }

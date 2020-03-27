@@ -28,6 +28,10 @@ a {
 }
 
 .headerLogo {
+    position: relative;
+    left: 30px;
+    top: 20px;
+    cursor: pointer;
     max-width: 10%;
     float: left;
 }

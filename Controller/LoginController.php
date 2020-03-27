@@ -14,6 +14,10 @@ class LoginController
 		$this->Config = Config::getInstance();
 		$this->DB_Helper = new DB_Helper();
 		$this->encryptionHelper = new EncryptionHelper();
+
+		if (isset($_SESSION["teacherId"])) {
+			header("Location: TeacherPage.php");
+		}
 	}
 	
 	// get config 

@@ -31,6 +31,7 @@ class ClassesView
 				<meta name='viewport' content='width=device-width, initial-scale=1'>
 				<script src='script.js'></script>
 				<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+				<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 			</head>
 		";
 	}
@@ -40,8 +41,7 @@ class ClassesView
 		<body>
 			<div class='header'>
 				<div class='headerLogo'>
-					<!--<img src='Images/Logo.png' class='logo'>-->
-					<div class='logo'></div>
+					".$this->ClassesController->GetBackButton()."
 				</div>
 				<div class='login'>
 					<a href='Login.php'><h2 id='loginH2' class='roboto'>I Am a Teacher</h2></a>
