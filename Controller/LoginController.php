@@ -1,5 +1,6 @@
 <?php
-require_once( "Autoloader.php");
+session_start();
+require_once("Autoloader.php");
 class LoginController 
 {
 	private $LoginModel;
@@ -13,6 +14,10 @@ class LoginController
 		$this->Config = Config::getInstance();
 		$this->DB_Helper = new DB_Helper();
 		$this->encryptionHelper = new EncryptionHelper();
+
+		if (isset($_SESSION["teacherId"])) {
+			header("Location: TeacherPage.php");
+		}
 	}
 	
 	// get config 
@@ -51,15 +56,15 @@ class LoginController
 		}
 	}
 
-	private function SetSession() {
+	private function SetSession($teacher) {
 		// encrypt id and set it in session, teacher is logged in
-		$_SESSION["userId"] = $this->encryptionHelper->Encrypt($this->teacher->id);
+		$_SESSION["teacherId"] = $this->encryptionHelper->Encrypt($teacher->id);
 	}
 
-	private function SetCookie() {
+	private function SetCookie($teacher) {
 		// set cookie remembering teacher email if the "remember me" checkbox has been checked upon login
 		if (isset($_POST["rememberPasswordCheck"])) {
-			setcookie("rememberTeacher", $this->teacher->email, time() + (86400 * 30), "/");
+			setcookie("rememberTeacher", $teacher->email, time() + (86400 * 30), "/");
 		}
 	}
 }

@@ -82,7 +82,7 @@ class DB_Helper
 		$cleanEmail = $this->CleanValue($email);
 
 		// does a prepared query
-		$stmt = $this->Conn->prepare("SELECT Id, Name, Prefix, LastName, SchoolId FROM `teacher` WHERE `Email` LIKE ?");
+		$stmt = $this->Conn->prepare("SELECT Id, `Name`, Prefix, LastName, SchoolId FROM `teacher` WHERE `Email` LIKE ?");
 		$stmt->bind_param("s", $cleanEmail);
 		$stmt->execute();
 		$stmt->store_result();
@@ -92,7 +92,7 @@ class DB_Helper
 			} else {
 				$stmt->bind_result($Id, $Name, $Prefix, $LastName, $SchoolId);
 				while ($stmt->fetch()) {
-					$teacher = new Teacher($Id, $Name, $Prefix, $LastName, $SchoolId, $password);
+					$teacher = new Teacher($Id, $Name, $Prefix, $LastName, $SchoolId, $cleanEmail);
 				}
 				return $teacher;
 			}
@@ -112,6 +112,90 @@ class DB_Helper
 			return true;
 		}
 	}
+	
+	public function GetClasses($groupName) {
+		// clean user input
+		$cleanGroupName = $this->CleanValue($groupName);
+
+		// does a prepared query
+		$stmt = $this->Conn->prepare("SELECT Id, `Name`, TestAmount, ExaminedAmount, TeacherId FROM class WHERE `Group` LIKE ?");
+		$stmt->bind_param("s", $cleanGroupName);
+		$stmt->execute();
+		$stmt->store_result();
+		if ($stmt->num_rows == 0) {
+			return false;
+		} else {
+			$stmt->bind_result($Id, $Name, $TestAmount, $ExaminedAmount, $TeacherId);
+			$classes = array();
+			while ($stmt->fetch()) {
+				$class = new ClassesModel($Id, $TeacherId, $Name, $cleanGroupName, $TestAmount, $ExaminedAmount);
+				$classes[] = $class;
+			}
+			return $classes;
+		}
+	}
+
+	public function GetTeacherClasses($groupName, $teacherId) {
+		// clean user input
+		$cleanGroupName = $this->CleanValue($groupName);
+
+		// does a prepared query
+		$stmt = $this->Conn->prepare("SELECT Id, `Name`, TestAmount, ExaminedAmount, TeacherId FROM class WHERE `Group` LIKE ? AND TeacherId LIKE ?");
+		$stmt->bind_param("si", $cleanGroupName, $teacherId);
+		$stmt->execute();
+		$stmt->store_result();
+		if ($stmt->num_rows == 0) {
+			return false;
+		} else {
+			$stmt->bind_result($Id, $Name, $TestAmount, $ExaminedAmount, $TeacherId);
+			$classes = array();
+			while ($stmt->fetch()) {
+				$class = new ClassesModel($Id, $TeacherId, $Name, $cleanGroupName, $TestAmount, $ExaminedAmount);
+				$classes[] = $class;
+			}
+			return $classes;
+		}
+	}
+
+	public function GetAllGroups() {
+		// does a prepared query
+		$stmt = $this->Conn->prepare("SELECT DISTINCT `Group` FROM class");
+		$stmt->execute();
+		$stmt->store_result();
+		if ($stmt->num_rows == 0) {
+			return false;
+		} else {
+			$stmt->bind_result($Group);
+			$groups = array();
+			while ($stmt->fetch()) {
+				$group = array("Name"=>$Group);
+				$groups[] = $group;
+			}
+			return $groups;
+		}
+	}
+
+	public function GetGroups($teacherId) {
+		// clean user input
+		$cleanId = $this->CleanValue($teacherId);
+
+		// does a prepared query
+		$stmt = $this->Conn->prepare("SELECT `Group`, Id FROM class WHERE TeacherId LIKE ?");
+		$stmt->bind_param("i", $cleanId);
+		$stmt->execute();
+		$stmt->store_result();
+		if ($stmt->num_rows == 0) {
+			return false;
+		} else {
+			$stmt->bind_result($Group, $Id);
+			$groups = array();
+			while ($stmt->fetch()) {
+				$group = array("Name"=>$Group, "Id"=>$Id);
+				$groups[] = $group;
+			}
+			return $groups;
+		}
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Insert
@@ -123,13 +207,14 @@ class DB_Helper
 		$cleanPrefix = $this->CleanValue($teacher->prefix);
 		$cleanLastName = $this->CleanValue($teacher->lastName);
 		$cleanEmail = $this->CleanValue($teacher->email);
+		$cleanPassword = $this->CleanValue($password);
 
 		// does prepared query
 		$stmt = $this->Conn->prepare("INSERT INTO teacher (Name, Prefix, LastName, SchoolId, Email) VALUES(?, ?, ?, ?, ?)");
 		$stmt->bind_param("sssis", $cleanName, $cleanPrefix, $cleanLastName, $teacher->schoolId, $cleanEmail);
 
 		// commit or rollback transaction
-		if ($this->SetTeacherPsw($password)) {
+		if ($this->SetTeacherPsw($cleanPassword)) {
 			if ($stmt->execute()) {
 				$this->Conn->commit();
 				return true;
@@ -155,15 +240,65 @@ class DB_Helper
 		}
 	}
 
+	public function AddNewClass($groupName, $className, $totalTests, $teacherId) {
+		// clean user input
+		$cleanClassName = $this->CleanValue($className);
+		$cleanTestAmount = $this->CleanValue($totalTests);
+		$cleanGroupName = $this->CleanValue($groupName);
+		$cleanExaminedAmount = 0;
+
+		// does a prepared query
+		$stmt = $this->Conn->prepare("INSERT INTO class (Name, TestAmount, ExaminedAmount, `Group`, TeacherId) VALUES(?, ?, ?, ?, ?)");
+		$stmt->bind_param("siisi", $cleanClassName, $cleanTestAmount, $cleanExaminedAmount, $cleanGroupName, $teacherId);
+		
+		// commit or rollback transaction 
+		if ($stmt->execute()) {
+			$this->Conn->commit();
+			return true;
+		} else {
+			$this->Conn->rollback();
+			return false;
+		}
+	}
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Update
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public function UpdateExaminedAmount($id, $examinedAmount) {
+		$cleanId = $this->CleanValue($id);
+		$cleanExaminedAmount = $this->CleanValue($examinedAmount);
+
+		$stmt = $this->Conn->prepare("UPDATE class SET ExaminedAmount = ? WHERE Id = ?");
+		$stmt->bind_param("ii", $cleanExaminedAmount, $cleanId);
+		if ($stmt->execute()) {
+			$this->Conn->commit();
+			return true;
+		} else {
+			$this->Conn->rollback();
+			return false;
+		}
+	}
+
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Delete
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public function DeleteClass($id) {
+		$cleanId = $this->CleanValue($id);
+		
+		$stmt = $this->Conn->prepare("DELETE FROM class WHERE Id = ?");
+		$stmt->bind_param("i", $cleanId);
+		if ($stmt->execute()) {
+			$this->Conn->commit();
+			return true;
+		} else {
+			$this->Conn->rollback();
+			return false;
+		}
+	}
 
 
 }

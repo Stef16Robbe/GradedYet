@@ -1,5 +1,5 @@
 <?php
-	//start when page load
+	// start when page loads
 	require_once("Autoloader.php");
 	$TeacherPageModel = new TeacherPageModel();
 	$TeacherPageController = new TeacherPageController($TeacherPageModel);

@@ -29,6 +29,10 @@ a {
 
 .headerLogo {
     max-width: 10%;
+    position: relative;
+    left: 30px;
+    top: 20px;
+    cursor: pointer;
     float: left;
 }
 
@@ -55,55 +59,79 @@ a {
     text-decoration: underline;
 }
 
-/*CLASSESGRID*/
-.classesCardsGrid {
+.classesGrid {
+    height: 30%;
+    width: 55.5%;
     position: relative;
-    top: 200px;
-    left: 200px;
+    top: 100px;
+    left: 100px;
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-column-gap: 30px;
     grid-row-gap: 30px;
-    max-height: 46.5%;
-    max-width: 80%;
 }
 
 .classCard {
-    width: 300px;
-    height: 500px;
+    height: 200px;
+    width: 350px;
+    border: 1px solid black;
+    border-radius: 4px;
     box-sizing: border-box;
     transition: transform .2s;
 }
 
-.classCard:hover {
-    -ms-transform: scale(1.05); /* IE 9 */
-    -webkit-transform: scale(1.05); /* Safari 3-8 */
-    transform: scale(1.05);
-}
-
-.topHalveClassCard {
-    height: 45%;
-}
-
-.bottomHalveClassCard {
-    height: 45%;
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-}
-
-.classesTitleH1 {
+.classTitleH2 {
     font-family: sans-serif;
+    font-size: 13px;
     height: 0px;
-    margin-left: 8%;
-    margin-top: 15%;
+    margin-top: 5%;
+    margin-left: 5%;
 }
 
-.classLinkP {   
-    font-family: sans-serif;
-    color: #07f;
-    font-weight: bold;
-    margin-top: 30%;
-    margin-left: 8%;
+.delIcon {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    position: relative;
+    left: 85%;
+    top: -9px;
+}
+
+.schoolName {
     height: 0px;
+}
+
+.classSpecifications {
+    font-family: sans-serif;
+    font-size: 16px;
+    position: relative;
+    left: 5%;
+    top: 2%;
+    height: 40px;
+}
+
+.examinedAmountTxt {
+    position: relative;
+    left: 80px;
+    top: -40px;
+    width: 25px;
+    height: 15px;
+}
+
+.totalAmount {
+    position: relative;
+    top: -58px;
+    left: 110px;
+}
+
+.saveExaminedAmount {
+    width: 50px;
+    position: relative;
+    left: 255px;
+    top: -50px;
+    cursor: pointer;
+}
+
+.progressBar {
+    width: 80%;
 }

@@ -29,6 +29,9 @@ class ClassesView
 				<link rel='stylesheet' type='text/css' href='./CSS/ClassesStyle.css'>
 				<link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet'>
 				<meta name='viewport' content='width=device-width, initial-scale=1'>
+				<script src='script.js'></script>
+				<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+				<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 			</head>
 		";
 	}
@@ -38,51 +41,15 @@ class ClassesView
 		<body>
 			<div class='header'>
 				<div class='headerLogo'>
-					<!--<img src='Images/Logo.png' class='logo'>-->
-					<div class='logo'></div>
+					".$this->ClassesController->GetBackButton()."
 				</div>
 				<div class='login'>
 					<a href='Login.php'><h2 id='loginH2' class='roboto'>I Am a Teacher</h2></a>
 				</div>
 			</div>
-            <div class='classesCardsGrid'>
-                <div class='classCard'>
-                    <div class='topHalveClassCard'>
-                        <img src='Images/Maths.png' class='classCardImage'>
-                    </div>
-                    <div class='bottomHalveClassCard'>
-                        <h1 class='classesTitleH1'>Mathmatics</h1>
-                        <a href='Maths.php'><p class='classLinkP'>Teacher Progress</p></a>
-                    </div>
-                </div>
-                <div class='classCard'>
-                    <div class='topHalveClassCard'>
-                        <img src='Images/Geography.png' class='classCardImage'>
-                    </div>
-                    <div class='bottomHalveClassCard'>
-                        <h1 class='classesTitleH1'>Geography</h1>
-                        <a href='Geography.php'><p class='classLinkP'>Teacher Progress</p></a>
-                    </div>
-                </div>
-                <div class='classCard'>
-                    <div class='topHalveClassCard'>
-                        <img src='Images/Programming.png' class='classCardImage'>
-                    </div>
-                    <div class='bottomHalveClassCard'>
-                        <h1 class='classesTitleH1'>Programming</h1>
-                        <a href='Programming.php'><p class='classLinkP'>Teacher progress</p></a>
-                    </div>
-                </div>
-                <div class='classCard'>
-                    <div class='topHalveClassCard'>
-                        <img src='Images/History.png' class='classCardImage'>
-                    </div>
-                    <div class='bottomHalveClassCard'>
-                        <h1 class='classesTitleH1'>History</h1>
-                        <a href='History.php'><p class='classLinkP'>Teacher Progress</p></a>
-                    </div>
-                </div>
-            </div>
+			<div class='classesGrid'>
+            	".$this->ClassesController->GetClasses()."
+        	</div>
 		</body>
 		</html>
 		";
