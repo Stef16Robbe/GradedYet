@@ -112,26 +112,26 @@ class DB_Helper
 			return true;
 		}
 	}
-
-	public function GetGroups($teacherId) {
+	
+	public function GetClasses($groupName) {
 		// clean user input
-		$cleanId = $this->CleanValue($teacherId);
+		$cleanGroupName = $this->CleanValue($groupName);
 
 		// does a prepared query
-		$stmt = $this->Conn->prepare("SELECT `Group`, Id FROM class WHERE TeacherId LIKE ?");
-		$stmt->bind_param("i", $cleanId);
+		$stmt = $this->Conn->prepare("SELECT Id, `Name`, TestAmount, ExaminedAmount, TeacherId FROM class WHERE `Group` LIKE ?");
+		$stmt->bind_param("s", $cleanGroupName);
 		$stmt->execute();
 		$stmt->store_result();
 		if ($stmt->num_rows == 0) {
 			return false;
 		} else {
-			$stmt->bind_result($Group, $Id);
-			$groups = array();
+			$stmt->bind_result($Id, $Name, $TestAmount, $ExaminedAmount, $TeacherId);
+			$classes = array();
 			while ($stmt->fetch()) {
-				$group = array("Name"=>$Group, "Id"=>$Id);
-				$groups[] = $group;
+				$class = new ClassesModel($Id, $TeacherId, $Name, $cleanGroupName, $TestAmount, $ExaminedAmount);
+				$classes[] = $class;
 			}
-			return $groups;
+			return $classes;
 		}
 	}
 
@@ -157,37 +157,37 @@ class DB_Helper
 		}
 	}
 
-	public function GetClasses($groupName) {
-		// clean user input
-		$cleanGroupName = $this->CleanValue($groupName);
-
+	public function GetAllGroups() {
 		// does a prepared query
-		$stmt = $this->Conn->prepare("SELECT Id, `Name`, TestAmount, ExaminedAmount, TeacherId FROM class WHERE `Group` LIKE ?");
-		$stmt->bind_param("s", $cleanGroupName);
+		$stmt = $this->Conn->prepare("SELECT DISTINCT `Group` FROM class");
 		$stmt->execute();
 		$stmt->store_result();
 		if ($stmt->num_rows == 0) {
 			return false;
 		} else {
-			$stmt->bind_result($Id, $Name, $TestAmount, $ExaminedAmount, $TeacherId);
-			$classes = array();
+			$stmt->bind_result($Group);
+			$groups = array();
 			while ($stmt->fetch()) {
-				$class = new ClassesModel($Id, $TeacherId, $Name, $cleanGroupName, $TestAmount, $ExaminedAmount);
-				$classes[] = $class;
+				$group = array("Name"=>$Group);
+				$groups[] = $group;
 			}
-			return $classes;
+			return $groups;
 		}
 	}
 
-	public function GetAllGroups() {
+	public function GetGroups($teacherId) {
+		// clean user input
+		$cleanId = $this->CleanValue($teacherId);
+
 		// does a prepared query
-		$stmt = $this->Conn->prepare("SELECT Id, `Group` FROM class");
+		$stmt = $this->Conn->prepare("SELECT `Group`, Id FROM class WHERE TeacherId LIKE ?");
+		$stmt->bind_param("i", $cleanId);
 		$stmt->execute();
 		$stmt->store_result();
 		if ($stmt->num_rows == 0) {
 			return false;
 		} else {
-			$stmt->bind_result($Id, $Group);
+			$stmt->bind_result($Group, $Id);
 			$groups = array();
 			while ($stmt->fetch()) {
 				$group = array("Name"=>$Group, "Id"=>$Id);

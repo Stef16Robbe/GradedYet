@@ -8,15 +8,19 @@ class ClassesController
 	private $Config;
 	private $DB_Helper;
 	private $allowedToEdit;
+	private $encryptionHelper;
+	private $teacherId;
 
 	public function __construct($ClassesModel) {
 		$this->allowedToEdit = false;
 		$this->ClassesModel = $ClassesModel;
 		$this->Config = Config::getInstance();
 		$this->DB_Helper = new DB_Helper();
+		$this->encryptionHelper = new EncryptionHelper();
 
 		if (isset($_SESSION["teacherId"])) {
 			$this->allowedToEdit = true;
+			$this->teacherId = $this->encryptionHelper->Decrypt($_SESSION["teacherId"]);
 		}
 
 		$this->CheckClasses();
@@ -47,7 +51,7 @@ class ClassesController
 		if ($groupName == null || empty($groupName)) {
 			header("Location: TeacherPage.php");
 		}
-		if ($this->allowedToEdit && !$this->DB_Helper->GetClasses($groupName, $_SESSION["teacherId"])) {
+		if ($this->allowedToEdit && !$this->DB_Helper->GetClasses($groupName, $this->teacherId)) {
 			header("Location: TeacherPage.php");
 		}
 	}
@@ -56,7 +60,7 @@ class ClassesController
 		$groupName = $_GET['groupName'];
 		$allClasses = "";
 		if ($this->allowedToEdit) {
-			$classes = $this->DB_Helper->GetTeacherClasses($groupName, $_SESSION["teacherId"]);
+			$classes = $this->DB_Helper->GetTeacherClasses($groupName, $this->teacherId);
 		} else {
 			$classes = $this->DB_Helper->GetClasses($groupName);
 		}

@@ -16,6 +16,7 @@ class TeacherPageController
 		if (!isset($_SESSION["teacherId"])) {
 			header("Location: Login.php");
 		}
+		var_dump($_SESSION["teacherId"]);
 	}
 	
 	// get config

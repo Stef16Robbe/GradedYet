@@ -22,11 +22,11 @@ class IndexController
 		if ($groups = $this->DB_Helper->GetAllGroups()) {
 			$allGroups = "";
 			foreach ($groups as $group) {
-				$allGroups .= "                
+				$allGroups .= "
 				<div class='classCard'>
 					<h1 class='classTitleH1'>".$group["Name"]."</h1>
 					<div class='viewClassesLink'>
-						<a href='Classes.php?groupName=".$group["Name"]."'><p class='classLinkP'>View your classes ></p></a>
+						<a href='Classes.php?groupName=".$group["Name"]."'><p class='classLinkP'>View classes ></p></a>
 					</div>
 				</div>
 				";
